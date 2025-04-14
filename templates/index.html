@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laptop Price Predictor</title>
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary: #f3f4f6;
+            --text: #1f2937;
+            --border: #d1d5db;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: #f9fafb;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px var(--shadow);
+            padding: 2rem;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            font-size: 2rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        select,
+        input[type="number"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            font-size: 1rem;
+            background-color: white;
+        }
+
+        select:focus,
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        .submit-container {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        input[type="submit"] {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .prediction {
+            margin-top: 2rem;
+            text-align: center;
+            padding: 1.5rem;
+            background-color: var(--secondary);
+            border-radius: 5px;
+        }
+
+        .prediction h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Laptop Price Predictor</h1>
+        <form method="POST">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="company">Brand:</label>
+                    <select id="company" name="company">
+                        {% for c in companies %}
+                        <option value="{{c}}">{{c}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="type">Type:</label>
+                    <select id="type" name="type">
+                        {% for t in types %}
+                        <option value="{{t}}">{{t}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="ram">RAM (in GB):</label>
+                    <select id="ram" name="ram">
+                        {% for r in [2,4,6,8,12,16,24,32,64] %}
+                        <option value="{{r}}">{{r}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="weight">Weight (kg):</label>
+                    <input type="number" step="any" id="weight" name="weight" placeholder="Enter laptop weight">
+                </div>
+
+                <div class="form-group">
+                    <label for="touchscreen">Touchscreen:</label>
+                    <select id="touchscreen" name="touchscreen">
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="ips">IPS Display:</label>
+                    <select id="ips" name="ips">
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="screen_size">Screen Size (inches):</label>
+                    <input type="number" step="any" id="screen_size" name="screen_size" min="10" max="18" value="13">
+                </div>
+
+                <div class="form-group">
+                    <label for="resolution">Resolution:</label>
+                    <select id="resolution" name="resolution">
+                        {% for res in
+                        ['1920x1080','1366x768','1600x900','3840x2160','3200x1800','2880x1800','2560x1600','2560x1440','2304x1440']
+                        %}
+                        <option value="{{res}}">{{res}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="cpu">CPU:</label>
+                    <select id="cpu" name="cpu">
+                        {% for c in cpus %}
+                        <option value="{{c}}">{{c}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="hdd">HDD (in GB):</label>
+                    <select id="hdd" name="hdd">
+                        {% for h in [0,128,256,512,1024,2048] %}
+                        <option value="{{h}}">{{h}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="ssd">SSD (in GB):</label>
+                    <select id="ssd" name="ssd">
+                        {% for s in [0,8,128,256,512,1024] %}
+                        <option value="{{s}}">{{s}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="gpu">GPU:</label>
+                    <select id="gpu" name="gpu">
+                        {% for g in gpus %}
+                        <option value="{{g}}">{{g}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="os">Operating System:</label>
+                    <select id="os" name="os">
+                        {% for o in oss %}
+                        <option value="{{o}}">{{o}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="submit-container">
+                <input type="submit" value="Predict Price">
+            </div>
+        </form>
+
+        {% if prediction %}
+        <div class="prediction">
+            <h2>Predicted Price: ₹{{ prediction }}</h2>
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>
