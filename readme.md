@@ -1,8 +1,4 @@
-Sure! Here's a complete `README.md` file for your **Laptop Price Predictor** project. It includes sections like project overview, setup instructions, features, usage, and more:
-
 ---
-
-```markdown
 # 💻 Laptop Price Predictor
 
 This project predicts the price of a laptop based on its specifications using machine learning techniques. It includes data preprocessing, feature engineering, model training, and a web interface built using **Flask** for user interaction.
@@ -128,10 +124,7 @@ laptop-price-predictor/
 
 For questions or feedback, reach out to:
 
-- **Name**: [Your Name]  
-- **Email**: [chunarapisyuh10@gmail.com]  
-- **LinkedIn/GitHub**: [Your profiles]
+- **Name**: [Chunara Piyush]  
+- **Email**: [chunarapiyush10@gmail.com]  
+- **GitHub**: [https://github.com/Piyush1716]
 
----
-
-```
